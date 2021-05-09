@@ -8,19 +8,20 @@ public class DefaultAuthenticationManager implements Authenticationservice {
     private String email;
     private String password;
 
-    public DefaultAuthenticationManager(UserService userService, String email, String password){
+    public DefaultAuthenticationManager(UserService userService, String email, String password) {
         this.userService = userService;
         this.email = email;
         this.password = password;
     }
+
     @Override
     public boolean authorize() {
-       try {
-           return userService.get(email).getPassword().equals(password);
-       }catch (Exception e) {
+        try {
+            return userService.get(email).getPassword().equals(password);
+        } catch (Exception e) {
 
-       }
-       return false;
+        }
+        return false;
 
     }
 }

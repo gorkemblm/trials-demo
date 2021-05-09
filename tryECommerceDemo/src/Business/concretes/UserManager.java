@@ -4,6 +4,7 @@ import Business.abstarcts.UserService;
 import Core.concretes.Util;
 import DataAccess.abstarcts.UserDao;
 import Entities.concretes.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,20 +19,17 @@ public class UserManager implements UserService {
     public void add(User user) {
         if (!validate(user)) return;
         userDao.addToDatabase(user);
-        System.out.println(user.getId() + " id li user veritabanına eklenmiştir.");
     }
 
     @Override
     public void delete(int id) {
         userDao.deleteFromDatabase(id);
-        System.out.println(id + " li kullanıcı veritabanından silinmiştir");
     }
 
     @Override
     public void update(User user) {
         if (!validate(user)) return;
         userDao.updateFromDatabase(user);
-        System.out.println(user.getEmail() + " mail li kullanıcı güncellenmiştir");
     }
 
     @Override
@@ -41,13 +39,14 @@ public class UserManager implements UserService {
 
     @Override
     public void getAll() {
-        for (User user: userDao.getAllFromDatabase()) {
-            System.out.println("name : " + user.getFirstName() + "\n"+
-            "surname : " + user.getLastName() + "\n"+
-            "email : " + user.getEmail() );
+        for (User user : userDao.getAllFromDatabase()) {
+            System.out.println("name : " + user.getFirstName() + "\n" +
+                    "surname : " + user.getLastName() + "\n" +
+                    "email : " + user.getEmail());
         }
     }
-    private boolean validate(User user){
+
+    private boolean validate(User user) {
         List<String> errors = new ArrayList<>();
 
         if (user.getFirstName().length() < 2
@@ -60,7 +59,6 @@ public class UserManager implements UserService {
         if (get(user.getEmail()) != null)
             errors.add("You have already account");
         if (errors.size() < 1) {
-            System.out.println("You have succesfully registered");
             return true;
         }
         for (String message : errors) {

@@ -10,10 +10,10 @@ public class InMemoryUserDao implements UserDao {
     //İçerisinde user tutması için
     private List<User> users = new ArrayList<User>();
 
-    public InMemoryUserDao(){
-        User user1 = new User(1,"Görkem","Bilim","gorkembilim@test.com","1234567");
-        User user2 = new User(2,"Zafer","Çalışkan","zafercaliskan@test.com","1234567");
-        User user3 = new User(3,"Sadık","Ortaoğlan","sadikortaoglan@test.com","1234567");
+    public InMemoryUserDao() {
+        User user1 = new User(1, "Görkem", "Bilim", "gorkembilim@test.com", "1234567");
+        User user2 = new User(2, "Zafer", "Çalışkan", "zafercaliskan@test.com", "1234567");
+        User user3 = new User(3, "Sadık", "Ortaoğlan", "sadikortaoglan@test.com", "1234567");
 
         users.add(user1);
         users.add(user2);
@@ -28,14 +28,14 @@ public class InMemoryUserDao implements UserDao {
 
     @Override
     public void deleteFromDatabase(int id) {
-        User filterUser = users.stream().filter(s-> s.getId() == id).findFirst().orElse(null);
+        User filterUser = users.stream().filter(s -> s.getId() == id).findFirst().orElse(null);
         users.remove(filterUser);
 
     }
 
     @Override
     public void updateFromDatabase(User user) {
-        User filterUser = users.stream().filter(s->s.getEmail().equals(user.getEmail())).findFirst().orElse(null);
+        User filterUser = users.stream().filter(s -> s.getEmail().equals(user.getEmail())).findFirst().orElse(null);
         filterUser.setId(user.getId());
         filterUser.setFirstName(user.getFirstName());
         filterUser.setLastName(user.getLastName());
@@ -46,7 +46,7 @@ public class InMemoryUserDao implements UserDao {
 
     @Override
     public User getFromDatabase(String email) {
-        User filterUser = users.stream().filter(s-> s.getEmail().equals(email)).findFirst().orElse(null);
+        User filterUser = users.stream().filter(s -> s.getEmail().equals(email)).findFirst().orElse(null);
         return filterUser;
     }
 

@@ -10,9 +10,13 @@ public class AuthManager implements AuthService {
 
     private UserService userService;
     private Authenticationservice authenticationservice;
-    private  EmailService emailService;
+    private EmailService emailService;
 
-    public AuthManager(EmailService emailService,UserService userService,Authenticationservice authenticationservice) {
+    public AuthManager() {
+
+    }
+
+    public AuthManager(EmailService emailService, UserService userService, Authenticationservice authenticationservice) {
         this.emailService = emailService;
         this.userService = userService;
         this.authenticationservice = authenticationservice;
@@ -20,14 +24,21 @@ public class AuthManager implements AuthService {
 
     @Override
     public void signUp(User user) {
-        userService.add(user);
+        if (authenticationservice.authorize()) {
+            System.out.println("You have already Account!");
+
+        } else {
+            System.out.println("You have succesfully registered");
+            userService.add(user);
+        }
+
     }
 
     @Override
     public void signIn() {
         if (authenticationservice.authorize()) {
             System.out.println("Login successfully");
-        }else {
+        } else {
             System.out.println("Login unsuccesfully");
         }
 

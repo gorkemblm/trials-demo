@@ -18,7 +18,7 @@ public class GoogleManagerAdapter implements Authenticationservice {
     @Override
     public boolean authorize() {
         //Google dan sorgulanmış ve doğrulanmış kabul edilip user eklendi.
-        userService.add(new User(1,"Görkem","Deneme","deneme@gmail.com","1234567"));
+        userService.add(new User(1, "GoogleFirstName", "GoogleLastName", email, password));
         return true;//Yetkilendirme varsa
     }
 }
